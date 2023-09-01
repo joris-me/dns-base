@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "coredns/**"
   workflow_dispatch:
 
 name: ci-main
