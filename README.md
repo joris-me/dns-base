@@ -1,4 +1,6 @@
 # dns-base
+[![ci-main](https://github.com/joris-me/dns-base/actions/workflows/ci-main.yml/badge.svg)](https://github.com/joris-me/dns-base/actions/workflows/ci-main.yml)
+
 This is a [CoreDNS](https://coredns.io/) image with additional plugins enabled:
 - [alternate](https://coredns.io/explugins/alternate/)
 - [records](https://coredns.io/explugins/alternate/)
