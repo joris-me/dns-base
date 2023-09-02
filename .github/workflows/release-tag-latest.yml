@@ -1,0 +1,15 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  
+  tag-latest:
+    runs-on: [self-hosted, linux, x64]
+  
+    steps:
+      - name: Tag latest release
+        uses: EndBug/latest-tag@v1.5.1
+        with:
+          ref: latest
+          description: Latest release
