@@ -1,0 +1,23 @@
+name: ghcr-cleanup
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight
+  workflow_dispatch:
+
+jobs:
+  clean-ghcr:
+    name: Delete old unused container images
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Delete 'dev' containers older than a week
+        uses: snok/container-retention-policy@v2
+        with:
+          image-names: dns-base
+          cut-off: One week ago UTC
+          account-type: org
+          org-name: joris-me
+          untagged-only: false
+          skip-tags: latest, master ,v*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          dry-run: true
