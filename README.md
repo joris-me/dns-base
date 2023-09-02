@@ -12,4 +12,4 @@ The produced image comes with a rudimentary [Corefile](/dns-base/Corefile) confi
 For additional info about CoreDNS, see the [CoreDNS README](coredns/README.md).
 
 ## Configuration
-Mount your `Corefile` at `/etc/coredns/Corefile` in the container.
+Mount your `Corefile` at `/Corefile` in the container.
