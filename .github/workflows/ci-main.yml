@@ -4,8 +4,9 @@ on:
       - master
     tags:
       - v*
-    paths-ignore:
-      - "README.md"
+    paths:
+      - "./*"
+      - ".github/workflows/ci-main.yml"
   pull_request:
     types: [opened, reopened]
   workflow_dispatch:
@@ -51,6 +52,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
+            type=ref,event=tag
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
