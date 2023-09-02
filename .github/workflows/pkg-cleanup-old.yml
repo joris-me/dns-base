@@ -8,13 +8,12 @@ on:
 jobs:
 
   cleanup-old-pkgs:
-    name: Delete old unused container images
     runs-on: [self-hosted, linux, x64]
     steps:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.11.0"
           check-latest: false
           allow-prereleases: false
 
