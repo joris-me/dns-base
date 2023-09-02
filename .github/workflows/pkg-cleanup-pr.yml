@@ -1,23 +1,26 @@
-name: ghcr-cleanup
+name: package-cleanup-pr
 
 on:
-  schedule:
-    - cron: "0 0 * * *" # every day at midnight
+  pull_request:
+    types: [closed]
   workflow_dispatch:
 
 jobs:
-  clean-ghcr:
+
+  cleanup-pr-pkgs:
     name: Delete old unused container images
     runs-on: [self-hosted, linux, x64]
     steps:
-      - name: Delete 'dev' containers older than a week
+      - name: Delete PR older than a week
         uses: snok/container-retention-policy@v2
         with:
           image-names: dns-base
-          cut-off: One week ago UTC
+          cut-off: now UTC
           account-type: org
           org-name: joris-me
           untagged-only: false
-          skip-tags: latest, master ,v*
+          filter-tags: pr-${{ github.event.number }}
+          skip-tags: latest, master, v*
           token: ${{ secrets.GITHUB_TOKEN }}
           dry-run: true
+  
