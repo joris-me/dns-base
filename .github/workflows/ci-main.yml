@@ -15,9 +15,22 @@ env:
   IMAGE_NAME: joris-me/dns-base
 
 jobs:
+  build:
+    # Set up this job to run in parallel.
+    strategy:
+      fail-fast: true
+      matrix:
+        arch: [x64, arm64]
+    
+    # Translate "x64" to "amd64"
+    env:
+      arch: ${{ matrix.arch == 'x64' && 'amd64' || matrix.arch }}
 
-  build-base:
-    runs-on: [self-hosted, linux, x64]
+    runs-on:
+      - self-hosted
+      - linux
+      - ${{ matrix.arch }}
+    
     steps:
       - uses: actions/checkout@v3
 
@@ -47,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: "."
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ env.arch }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
