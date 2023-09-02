@@ -1,4 +1,4 @@
-name: package-cleanup-pr
+name: pkg-cleanup-pr
 
 on:
   pull_request:
