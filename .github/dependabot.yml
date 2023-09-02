@@ -5,6 +5,14 @@
 
 version: 2
 updates:
+
+  # Check for Github Actions version updates (for CI/CD)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # Check for Docker image updates
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
