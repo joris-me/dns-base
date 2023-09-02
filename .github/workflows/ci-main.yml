@@ -6,6 +6,8 @@ on:
       - v*
     paths-ignore:
       - "README.md"
+  pull_request:
+    types: [opened, reopened]
   workflow_dispatch:
 
 name: ci-main
@@ -18,7 +20,6 @@ jobs:
   build:
     # Set up this job to run in parallel.
     strategy:
-      fail-fast: true
       matrix:
         arch: [x64, arm64]
     
