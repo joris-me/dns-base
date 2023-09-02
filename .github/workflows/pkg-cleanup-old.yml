@@ -8,14 +8,14 @@ on:
 jobs:
 
   cleanup-old-pkgs:
-    runs-on: [self-hosted, linux, x64]
+    runs-on: ubuntu-latest
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11.0"
-          check-latest: false
-          allow-prereleases: false
+      # - name: Setup Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.11.0"
+      #     check-latest: false
+      #     allow-prereleases: false
 
       - name: Delete unused packages older than a week
         uses: snok/container-retention-policy@v2
