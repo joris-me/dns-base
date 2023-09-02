@@ -15,10 +15,10 @@ RUN sed -i "s/hosts:hosts/hosts:hosts\\nrecords:github.com\/coredns\/records/" p
 RUN make
 
 # Copy the coredns binary to its own image.
-FROM alpine:latest AS coredns
-COPY --from=builder /go/coredns/coredns /usr/bin/coredns
-RUN mkdir -p /etc/coredns
+FROM coredns/coredns:1.11.0 AS coredns
+COPY --from=builder /go/coredns/coredns /coredns
+#RUN mkdir -p /etc/coredns
 
 # Include a blank whois Corefile.
-COPY Corefile /etc/coredns/Corefile
-ENTRYPOINT [ "coredns", "-conf", "/etc/coredns/Corefile" ]
+COPY Corefile /Corefile
+ENTRYPOINT [ "/coredns", "-conf", "/Corefile" ]
