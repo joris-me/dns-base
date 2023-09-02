@@ -15,7 +15,7 @@ RUN sed -i "s/hosts:hosts/hosts:hosts\\nrecords:github.com\/coredns\/records/" p
 RUN make
 
 # Copy the coredns binary to its own image.
-FROM coredns/coredns:1.11.0 AS coredns
+FROM coredns/coredns:1.11.1 AS coredns
 COPY --from=builder /go/coredns/coredns /coredns
 #RUN mkdir -p /etc/coredns
 
