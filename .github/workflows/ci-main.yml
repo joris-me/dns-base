@@ -14,8 +14,9 @@ on:
 name: ci-main
 
 env:
+  IMAGE: joris-me/dns-base
   REGISTRY: ghcr.io
-  REGISTRY_IMAGE: joris-me/dns-base
+  REGISTRY_IMAGE: ghcr.io/joris-me/dns-base
 
 jobs:
 
@@ -50,7 +51,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.REGISTRY_IMAGE }}
+          images: ${{ env.REGISTRY_IMAGE }}
       
       - name: Build and push by digest
         id: build
