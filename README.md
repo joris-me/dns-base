@@ -1,7 +1,6 @@
 # dns-base
 [![ci-main](https://github.com/joris-me/dns-base/actions/workflows/ci-main.yml/badge.svg)](https://github.com/joris-me/dns-base/actions/workflows/ci-main.yml)
-![GitHub tag (with filter)](https://img.shields.io/github/v/tag/joris-me/dns-base?filter=v*&label=version)
-
+[![GitHub tag (with filter)](https://img.shields.io/github/v/tag/joris-me/dns-base?filter=v*&label=release)](https://github.com/joris-me/dns-base/pkgs/container/dns-base)
 
 This is a [CoreDNS](https://coredns.io/) image with additional plugins enabled:
 - [alternate](https://coredns.io/explugins/alternate/)
