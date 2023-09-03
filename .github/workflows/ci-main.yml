@@ -19,20 +19,18 @@ env:
 
 jobs:
   build:
-    # Set up this job to run in parallel.
+    # Set up this job to run in parallel per arcitecture
     strategy:
       matrix:
         arch: [amd64, arm64]
     
-    # Translate "amd64" to "x64" for Github Runner labels.
     env:
-      runner-arch-label: ${{ matrix.arch == 'amd64' && 'x64' || matrix.arch }}
       docker-arch: linux/${{ matrix.arch }}
 
     runs-on:
       - self-hosted
       - linux
-      - ${{ env.runner-arch-label }}
+      - ${{ matrix.arch }}
     
     steps:
       - uses: actions/checkout@v3
