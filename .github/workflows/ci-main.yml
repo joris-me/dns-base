@@ -22,16 +22,17 @@ jobs:
     # Set up this job to run in parallel.
     strategy:
       matrix:
-        arch: [x64, arm64]
+        arch: [amd64, arm64]
     
-    # Translate "x64" to "amd64"
+    # Translate "amd64" to "x64" for Github Runner labels.
     env:
-      arch: ${{ matrix.arch == 'x64' && 'amd64' || matrix.arch }}
+      runner-arch-label: ${{ matrix.arch == 'amd64' && 'x64' || matrix.arch }}
+      docker-arch: linux/${{ env.arch }}
 
     runs-on:
       - self-hosted
       - linux
-      - ${{ matrix.arch }}
+      - ${{ env.runner-arch-label }}
     
     steps:
       - uses: actions/checkout@v3
@@ -50,6 +51,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
+          flavor: |
+            latest=auto
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=tag
@@ -63,7 +66,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: "."
-          platforms: ${{ env.arch }}
+          platforms: linux/${{ env.docker-arch }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
