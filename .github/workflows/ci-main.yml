@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: "."
-          platforms: linux/${{ env.docker-arch }}
+          platforms: ${{ env.docker-arch }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
