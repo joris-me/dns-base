@@ -53,6 +53,11 @@ jobs:
         with:
           images: ${{ env.REGISTRY_IMAGE }}
       
+      - name: Prepare output directories
+        run: |
+          mkdir -p /tmp/images
+          mkdir -p /tmp/digests
+      
       # Build image.
       # See: https://github.com/docker/build-push-action/issues/225
       - name: Build image
@@ -76,7 +81,6 @@ jobs:
 
       - name: Export digest
         run: |
-          mkdir -p /tmp/digests
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
       
