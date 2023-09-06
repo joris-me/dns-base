@@ -114,7 +114,9 @@ jobs:
       
       - name: Import image
         run: |
-          docker load --input /tmp/images/*
+          for image in /tmp/images/*.tar; do
+            docker load --input $image;
+          done
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
