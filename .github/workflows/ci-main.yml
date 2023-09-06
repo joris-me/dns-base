@@ -8,7 +8,6 @@ on:
       - "./*"
       - ".github/workflows/ci-main.yml"
   pull_request:
-    types: [opened, reopened]
   workflow_dispatch:
 
 name: ci-main
