@@ -51,7 +51,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY_IMAGE }}
+          images: ${{ env.IMAGE }}
       
       - name: Prepare output directories
         run: |
@@ -119,16 +119,16 @@ jobs:
         run: |
           docker run -d -p 127.0.0.1:5000:5000 --name registry registry:2
       
-      - name: Import image
+      - name: Import images and list them
         run: |
           for image in /tmp/images/*.tar; do
             docker load --input $image
-          done
+          done;
+          docker image ls
 
       - name: Push images to local registry
         run: |
           docker push localhost:5000/${{ env.IMAGE }}
-
 
       # - name: Login to the container registry
       #   uses: docker/login-action@v2
