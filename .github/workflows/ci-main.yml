@@ -116,9 +116,11 @@ jobs:
         uses: docker/setup-buildx-action@v2
       
       - name: Launch local container registry
-        run: |
-          docker run -d -p 127.0.0.1:5000:5000 --name registry registry:2
-      
+        uses: addnab/docker-run-action@v3
+        with:
+          options: -p 127.0.0.1:5000:5000
+          image: registry:2
+
       - name: Import images and list them
         run: |
           for image in /tmp/images/*.tar; do
